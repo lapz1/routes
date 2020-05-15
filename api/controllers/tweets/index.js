@@ -1,12 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const dateUtilities = require('./../../utilities/date');
+
+const tweets = require('./../../services/tweets');
 
 router.route('/')
 	.get((req, res) => {
-		res.send('Lista de tweets');
+		res.send(tweets.loadTweets());
 	})
 	.post((req, res) => {
-		res.send('Nuevo tweets');
+		const tweet = {
+			id: tweets.tweetsArray.length,
+			content: req.body.content,
+			date: dateUtilities.getDate(),
+			user: req.body.user	
+		};
+		
+		tweets.newTweet(tweet);
+		res.send('El tweet ha sido creado');
 	});
 
 router.route('/:id')
