@@ -17,7 +17,7 @@ router.route('/')
 		};
 		
 		tweets.newTweet(tweet);
-		res.send('El tweet ha sido creado');
+		res.send({resp: 'El tweet ha sido creado'});
 	});
 
 router.route('/:id')

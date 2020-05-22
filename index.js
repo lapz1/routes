@@ -6,6 +6,7 @@ const api = require('./api');
 
 app.use(express.json());
 app.use('/api',api);
+app.use(express.static('./public'));
 
 //Server
 app.listen(config.port, ()=> {
