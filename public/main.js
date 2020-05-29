@@ -33,7 +33,43 @@ const newTweet = () => {
 	.then(response => {
 		getTweets();
 		document.getElementById("contenido").value = "";
-		//alert("El tweet ha sido enviado");
+		alert(response.resp);
+	});
+};
+
+const findTweet = () => {
+	//Se define la ruta hacia donde se enviará la petición
+	const id = document.getElementById("contenido").value;
+	const url = '/api/tweets/'+ id;
+	
+	//Se hace una petición tipo get usando Fetch
+	fetch(url).then(res => res.json())
+	//Respuesta con error
+	.catch(error => console.error('Error:', error))
+	//Respuesta exitosa
+	.then(response => {		
+		document.getElementById("contenido").value = "";
+		alert(response.resp);
+	});
+};
+
+const deleteTweet = () => {
+	//Se define la ruta hacia donde se enviará la petición
+	const id = document.getElementById("contenido").value;
+	const url = '/api/tweets/'+ id;
+
+	//Se hace una petición tipo get usando Fetch
+	fetch(url,{
+		method: 'delete'
+	})
+	.then(res => res.json())
+	//Respuesta con error
+	.catch(error => console.error('Error:', error))
+	//Respuesta exitosa
+	.then(response => {	
+		getTweets();	
+		document.getElementById("contenido").value = "";
+		alert(response.resp);
 	});
 };
 
